@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "划词翻译 · 本地优先",
+  "version": "1.0.0",
+  "description": "划词即译。Chrome 内置本地模型优先，云 API 兜底。",
+  "minimum_chrome_version": "138",
+  "permissions": ["storage", "offscreen", "sidePanel"],
+  "host_permissions": [
+    "https://api-free.deepl.com/*",
+    "https://api.deepl.com/*",
+    "https://fanyi-api.baidu.com/*",
+    "https://api.dictionaryapi.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "side_panel": {
+    "default_path": "options.html"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "划词翻译设置"
+  }
+}
